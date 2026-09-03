@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Um projeto educacional que aproxima música, emoções e bem-estar." />
+  <title>SentiSom | Música para o seu momento</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap');
+
+:root { --ink:#201b37; --muted:#6f6786; --violet:#7155ef; --purple:#5135c7; --lilac:#eeeaff; --peach:#ffede5; --line:rgba(56,42,104,.13); --cream:#fffcf8; }
+* { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; color:var(--ink); background:var(--cream); font-family:"DM Sans",Arial,sans-serif; } button,input,textarea,select { font:inherit; } button { cursor:pointer; } button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible { outline:3px solid #e49d64; outline-offset:3px; }
+main { overflow:hidden; position:relative; } .aurora { position:absolute; pointer-events:none; filter:blur(10px); border-radius:50%; opacity:.55; }.aurora-one { width:38rem;height:38rem;right:-20rem;top:-15rem;background:radial-gradient(circle,#ffb4b3 0 16%,#c49dff 48%,transparent 70%); }.aurora-two{width:34rem;height:34rem;left:-20rem;top:35rem;background:radial-gradient(circle,#d7b8ff,#9dcfff 45%,transparent 68%);}
+.site-header { height:86px; max-width:1180px; margin:auto; padding:0 28px; display:flex; align-items:center; justify-content:space-between; position:relative;z-index:3; }.brand { border:0;background:none;padding:0;color:var(--ink);font-size:23px;font-weight:700;letter-spacing:-1px;display:flex;align-items:center;gap:7px; }.brand>span:not(.brand-mark){color:var(--violet)}.brand-mark{width:27px;height:25px;display:flex;align-items:flex-end;gap:3px;padding-bottom:3px}.brand-mark i{width:5px;background:var(--violet);border-radius:5px}.brand-mark i:nth-child(1){height:9px}.brand-mark i:nth-child(2){height:18px;background:#e37d91}.brand-mark i:nth-child(3){height:13px;background:#f1b765}nav{display:flex;align-items:center;gap:24px}nav button,footer button{border:0;background:none;color:var(--muted);font-size:14px;transition:.2s}nav button:hover,footer button:hover{color:var(--violet)}.menu-toggle{display:none;border:0;background:none;width:38px}.menu-toggle span{height:2px;background:var(--ink);display:block;margin:5px}
+.hero{position:relative;z-index:1;min-height:655px;max-width:1180px;margin:auto;padding:90px 28px 105px;display:grid;grid-template-columns:1fr 1.04fr;gap:70px;align-items:center}.eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.6px;color:var(--violet);margin:0 0 18px}.sparkle{font-size:15px;margin-right:6px}.hero h1,.section-heading h2,.contact-intro h2{font-family:Fraunces,Georgia,serif;letter-spacing:-2.6px;line-height:1.05;margin:0}.hero h1{font-size:clamp(45px,5vw,73px);max-width:600px}.hero h1 em{color:var(--violet);font-style:italic}.hero-text{font-size:17px;line-height:1.65;color:var(--muted);max-width:500px;margin:28px 0 0}.experience-card{background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.7);backdrop-filter:blur(10px);border-radius:25px;padding:28px;box-shadow:0 25px 70px rgba(73,47,135,.15);position:relative}.experience-card label,.contact-form label{font-size:13px;font-weight:700;display:block;margin-bottom:9px}.experience-card textarea,.contact-form input,.contact-form textarea,.contact-form select{width:100%;border:1px solid var(--line);background:#fff;border-radius:13px;padding:15px;color:var(--ink);resize:vertical;transition:.2s}.experience-card textarea{font-size:16px;line-height:1.5}.experience-card textarea:focus,.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{border-color:var(--violet);box-shadow:0 0 0 4px #efebff;outline:0}.mood-row,.genre-row{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 19px}.mood-row button,.genre-row button{border:1px solid #ded6fb;color:#665b83;background:#f7f5ff;border-radius:99px;padding:7px 11px;font-size:12px}.mood-row button:hover,.mood-row button.selected,.genre-row button:hover,.genre-row button.selected{background:#e6ddff;color:#4830b0;border-color:#b8a7f5}.genre-label{font-size:13px;font-weight:700;display:block;margin-top:18px}.genre-help{font-size:11px;color:#867c9d;margin:-10px 0 14px}.api-status{font-size:11px;color:#867c9d;margin:10px 0 0}.api-status.error{color:#a34d4d}.primary-button{border:0;background:linear-gradient(100deg,var(--violet),#8b60e7);color:white;border-radius:13px;padding:14px 19px;font-weight:700;box-shadow:0 8px 18px rgba(98,70,204,.27);transition:transform .2s,box-shadow .2s}.primary-button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 22px rgba(98,70,204,.32)}.primary-button:disabled{opacity:.5;cursor:not-allowed}.primary-button span{font-size:19px;vertical-align:-1px;margin-left:7px}.prototype-note{color:#867c9d;font-size:11px;margin:14px 0 0}.recommendation{display:grid;grid-template-columns:95px 1fr;gap:17px;border-top:1px solid var(--line);margin-top:23px;padding-top:21px;animation:reveal .45s ease both}.album-art{border-radius:15px;aspect-ratio:1;background:linear-gradient(145deg,#f6ac9e 0%,#efa0c1 35%,#7956c6 75%);position:relative;overflow:hidden;display:grid;place-items:center;color:#fff;font-size:44px;box-shadow:inset 0 0 30px rgba(255,255,255,.35)}.album-art:before{content:"";position:absolute;inset:18px;border:2px solid #fff7;border-radius:50%}.album-art i{position:absolute;width:150px;height:34px;background:#ffc86f88;transform:rotate(-48deg);top:35px}.result-tag{font-size:11px;color:var(--violet);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin:1px 0 5px}.recommendation h2{font-size:19px;margin:0}.artist{font-size:13px;color:var(--muted);margin:2px 0 9px}.result-note{font-size:13px;line-height:1.45;margin:0 0 10px;color:#4c4560}.listen-button{border:0;background:none;padding:0;color:var(--violet);font-size:12px;font-weight:700}.sound-orbit{position:absolute;border:1px solid #d6cafa;border-radius:50%;display:grid;place-items:center;color:var(--violet);animation:float 5s ease-in-out infinite}.orbit-a{height:66px;width:66px;left:2%;top:29%}.orbit-b{height:46px;width:46px;right:4%;bottom:18%;animation-delay:-2s;color:#ea8d8d}
+.section{position:relative;z-index:1;padding:108px max(28px,calc((100vw - 1124px)/2));}.section-heading h2,.contact-intro h2{font-size:clamp(34px,4vw,52px);max-width:690px}.about-section{background:#f2eeff}.about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:90px;align-items:center;margin-top:52px}.sound-visual{height:330px;border-radius:30px;background:linear-gradient(145deg,#643bd0,#9771eb);display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:20px 20px 0 #d9ceff}.sound-visual span{width:15px;border-radius:99px;background:#ffcad1;animation:wave 1.5s ease-in-out infinite}.sound-visual span:nth-child(1),.sound-visual span:nth-child(7){height:54px}.sound-visual span:nth-child(2),.sound-visual span:nth-child(6){height:110px;animation-delay:-.5s}.sound-visual span:nth-child(3),.sound-visual span:nth-child(5){height:175px;animation-delay:-.2s}.sound-visual span:nth-child(4){height:235px;background:#ffd57e}.about-copy{font-size:17px;line-height:1.7;color:#554e69}.about-copy p{margin:0 0 17px}.about-copy .kicker{font-weight:700;color:var(--violet);font-size:15px}.about-copy .emphasis{font-family:Fraunces,Georgia,serif;color:var(--ink);font-size:22px;line-height:1.35}.learn-section{background:#fffaf7}.center{text-align:center}.center h2{margin-left:auto;margin-right:auto}.center>p:not(.eyebrow){color:var(--muted);margin:17px auto 0}.learn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px;margin-top:52px}.info-card{border:1px solid var(--line);background:#fff;border-radius:20px;padding:23px;display:flex;flex-direction:column;min-height:320px;transition:transform .2s,box-shadow .2s}.info-card:hover{transform:translateY(-5px);box-shadow:0 14px 35px #44318018}.info-icon{height:39px;width:39px;display:grid;place-items:center;border-radius:12px;background:#eee8ff;color:var(--violet);font-size:22px}.info-card:nth-child(2) .info-icon{background:#ffe7e4;color:#df777d}.info-card:nth-child(3) .info-icon{background:#e6f1ff;color:#5c8ac8}.info-card:nth-child(4) .info-icon{background:#fff0d8;color:#d59143}.info-card h3{font-size:18px;margin:19px 0 10px}.info-card p{font-size:13px;line-height:1.55;color:var(--muted);margin:0}.info-card a{margin-top:auto;padding-top:17px;color:var(--violet);font-size:12px;font-weight:700;text-decoration:none}.disclaimer{max-width:850px;margin:45px auto 0;text-align:center;background:#f4f0ff;padding:15px 20px;border-radius:14px;color:#665c80;font-size:12px;line-height:1.55}.contact-section{background:var(--ink);color:#fff;display:grid;grid-template-columns:.85fr 1.15fr;gap:95px;align-items:center}.contact-intro h2{color:#fff}.contact-intro>p:not(.eyebrow){font-size:17px;line-height:1.6;color:#c8c0d7;max-width:410px;margin-top:20px}.contact-dots{display:flex;gap:12px;margin-top:38px}.contact-dots i{display:block;border-radius:50%;background:#a77bff;width:12px;height:12px;box-shadow:26px 9px #ec9aa4,55px -3px #f2c66f,81px 15px #8ed8d0}.contact-form{background:#fff;color:var(--ink);border-radius:23px;padding:29px;box-shadow:0 20px 50px #05020a40}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.contact-form label{margin-bottom:16px}.contact-form input,.contact-form textarea,.contact-form select{margin-top:7px;font-weight:400;font-size:14px}.success{background:#ebf9ec;color:#287240;border-radius:10px;padding:12px;font-size:13px;margin:16px 0 0}.contact-form .prototype-note{margin-top:13px}footer{background:#171427;color:#b9b1cb;min-height:126px;padding:32px max(28px,calc((100vw - 1124px)/2));display:flex;align-items:center;justify-content:space-between;gap:25px;font-size:12px}footer .brand{color:#fff;font-size:19px}footer p{margin:0;text-align:center}footer div{display:flex;gap:13px}footer button{font-size:12px;color:#b9b1cb;padding:0}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}@keyframes float{50%{transform:translateY(-11px) rotate(8deg)}}@keyframes wave{50%{transform:scaleY(.65)}}@keyframes reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:850px){.hero{grid-template-columns:1fr;gap:45px;padding-top:64px}.hero-copy{text-align:center}.hero-text{margin-left:auto;margin-right:auto}.hero h1{margin:auto}.sound-orbit{display:none}.about-grid,.contact-section{grid-template-columns:1fr;gap:45px}.learn-grid{grid-template-columns:repeat(2,1fr)}.contact-section{padding-top:80px;padding-bottom:80px}.contact-intro{text-align:center}.contact-intro h2,.contact-intro>p{margin-left:auto;margin-right:auto}.contact-dots{justify-content:center}.sound-visual{height:240px}}
+@media(max-width:620px){.site-header{height:72px;padding:0 20px}.menu-toggle{display:block}nav{display:none;position:absolute;top:61px;right:16px;background:#fff;border:1px solid var(--line);box-shadow:0 12px 30px #30234d20;border-radius:15px;padding:9px;flex-direction:column;align-items:stretch;gap:0}nav.open{display:flex}nav button{text-align:left;padding:11px 16px}.hero{padding:50px 20px 72px;min-height:auto}.hero h1{font-size:45px}.hero-text{font-size:15px}.experience-card{padding:20px;border-radius:20px}.section{padding:75px 20px}.section-heading h2,.contact-intro h2{letter-spacing:-1.7px}.about-grid{margin-top:36px;gap:34px}.sound-visual{height:190px;box-shadow:12px 12px 0 #d9ceff}.sound-visual span{width:11px}.sound-visual span:nth-child(4){height:145px}.sound-visual span:nth-child(3),.sound-visual span:nth-child(5){height:115px}.learn-grid{grid-template-columns:1fr}.info-card{min-height:250px}.contact-section{gap:35px}.form-row{grid-template-columns:1fr;gap:0}.contact-form{padding:21px}.recommendation{grid-template-columns:75px 1fr;gap:13px}.album-art{font-size:35px}footer{flex-direction:column;padding:30px 20px;gap:17px}footer div{gap:17px}.mood-row{gap:6px}.mood-row button{padding:6px 9px}}
+
+  </style>
+</head>
+<body>
+<main>
+  <div class="aurora aurora-one"></div>
+  <div class="aurora aurora-two"></div>
+
+  <header class="site-header">
+    <button class="brand" data-scroll="inicio" aria-label="Voltar ao início">
+      <span class="brand-mark"><i></i><i></i><i></i></span>Senti<span>Som</span>
+    </button>
+
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span><b class="sr-only">Abrir menu</b>
+    </button>
+
+    <nav id="mainNav" aria-label="Navegação principal">
+      <button data-scroll="inicio">Início</button>
+      <button data-scroll="quem-somos">Quem Somos</button>
+      <button data-scroll="saiba-mais">Saiba Mais</button>
+      <button data-scroll="contato">Contato</button>
+    </nav>
+  </header>
+
+  <section id="inicio" class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="sparkle" aria-hidden="true">✦</span> Música para o seu momento</p>
+      <h1>Como você está se <em>sentindo</em> agora?</h1>
+      <p class="hero-text">
+        Escreva o que passa aí dentro. Em breve, o SentiSom vai ajudar você a encontrar músicas que conversem com o seu momento.
+      </p>
+    </div>
+
+    <div class="experience-card">
+      <label for="feeling">Me conta um pouco</label>
+      <textarea id="feeling" placeholder="Estou cansado e meio desanimado hoje..." rows="3"></textarea>
+
+      <div class="mood-row" aria-label="Sentimentos sugeridos">
+        <button type="button">Feliz</button>
+        <button type="button">Triste</button>
+        <button type="button">Ansioso</button>
+        <button type="button">Calmo</button>
+        <button type="button">Cansado</button>
+        <button type="button">Animado</button>
+        <button type="button">Com saudade</button>
+      </div>
+
+      <span class="genre-label">Que tipo de música você curte?</span>
+      <div class="genre-row" id="genreRow" aria-label="Preferências musicais">
+        <button type="button" class="selected" data-genre="Tanto faz">Tanto faz</button>
+        <button type="button" data-genre="Rock">Rock</button>
+        <button type="button" data-genre="Funk">Funk</button>
+        <button type="button" data-genre="Pop">Pop</button>
+        <button type="button" data-genre="Rap/Trap">Rap/Trap</button>
+        <button type="button" data-genre="Pagode/Samba">Pagode/Samba</button>
+        <button type="button" data-genre="Sertanejo">Sertanejo</button>
+        <button type="button" data-genre="MPB">MPB</button>
+        <button type="button" data-genre="Eletrônica">Eletrônica</button>
+        <button type="button" data-genre="Indie">Indie</button>
+      </div>
+      <p class="genre-help">Você pode escolher até 3 estilos.</p>
+
+      <button class="primary-button" id="findMusic" type="button" disabled>
+        Encontrar uma música <span>→</span>
+      </button>
+
+      <article class="recommendation" id="recommendation" aria-live="polite" hidden>
+        <div class="album-art"><span>◒</span><i></i></div>
+        <div>
+          <p class="result-tag" id="resultTag"></p>
+          <h2 id="resultTitle"></h2>
+          <p class="artist" id="resultArtist"></p>
+          <p class="result-note" id="resultNote"></p>
+          <button class="listen-button" id="listenButton" type="button" hidden>Ouvir agora no YouTube <span>↗</span></button>
+        </div>
+      </article>
+
+      <p class="prototype-note">Recomendação personalizada por IA para fins educacionais. O SentiSom não realiza diagnóstico nem substitui acompanhamento profissional.</p><p class="api-status" id="apiStatus" role="status"></p>
+    </div>
+
+    <div class="sound-orbit orbit-a"><span>♪</span></div>
+    <div class="sound-orbit orbit-b"><span>✦</span></div>
+  </section>
+
+  <section id="quem-somos" class="section about-section">
+    <div class="section-heading">
+      <p class="eyebrow">Nossa história</p>
+      <h2>Feito por jovens, para momentos reais.</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="sound-visual" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <div class="about-copy">
+        <p class="kicker">Quem Somos</p>
+        <p>Somos alunos do 9º ano do Colégio Positivo Boa Vista, em Curitiba/PR, participando da MOBIPE.</p>
+        <p>
+          Criamos o SentiSom para explorar como a música pode estar presente nos diferentes momentos e sentimentos do nosso dia.
+          Queremos desenvolver uma ferramenta simples e acessível para que cada pessoa possa contar como está se sentindo e descobrir sons que combinem com aquele momento.
+        </p>
+        <p class="emphasis">Um projeto educacional sobre música, emoções e novas formas de se conectar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="saiba-mais" class="section learn-section">
+    <div class="section-heading center">
+      <p class="eyebrow">Para ir além</p>
+      <h2>Informação também faz parte do cuidado.</h2>
+      <p>Conteúdo curto e confiável para aprender com responsabilidade.</p>
+    </div>
+
+    <div class="learn-grid">
+      <article class="info-card">
+        <div class="info-icon">♫</div>
+        <h3>O que é Musicoterapia?</h3>
+        <p>É um campo de conhecimento que utiliza música e experiências musicais em processos conduzidos por profissionais qualificados, em diferentes contextos de promoção, prevenção e reabilitação da saúde.</p>
+        <a href="https://ubammusicoterapia.com.br/institucional/musicoterapia/definicao/" target="_blank" rel="noreferrer">Saiba mais na UBAM <span>↗</span></a>
+      </article>
+
+      <article class="info-card">
+        <div class="info-icon">≈</div>
+        <h3>Ansiedade</h3>
+        <p>Pode envolver preocupação, inquietação, alterações no sono, dificuldade de concentração e outros sintomas. A intensidade e o contexto variam de pessoa para pessoa.</p>
+        <a href="https://www.gov.br/saude/pt-br/assuntos/saude-brasil/eu-quero-me-exercitar/noticias/2019/como-a-atividade-fisica-pode-te-ajudar-a-aliviar-os-sintomas-da-ansiedade" target="_blank" rel="noreferrer">Saiba mais sobre ansiedade <span>↗</span></a>
+      </article>
+
+      <article class="info-card">
+        <div class="info-icon">☁</div>
+        <h3>Depressão</h3>
+        <p>É uma condição de saúde que pode afetar humor, interesse, energia, concentração, sono e outros aspectos da vida. O diagnóstico deve ser feito por um profissional de saúde.</p>
+        <a href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/d/depressao" target="_blank" rel="noreferrer">Saiba mais sobre depressão — Ministério da Saúde <span>↗</span></a>
+      </article>
+
+      <article class="info-card">
+        <div class="info-icon">◌</div>
+        <h3>Saúde Mental</h3>
+        <p>Envolve fatores emocionais, sociais, biológicos e ambientais; não se resume somente ao que uma pessoa sente em determinado momento.</p>
+        <a href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/s/saude-mental" target="_blank" rel="noreferrer">Saiba mais — Ministério da Saúde <span>↗</span></a>
+      </article>
+    </div>
+
+    <p class="disclaimer">
+      <strong>Importante:</strong> o SentiSom é um projeto educacional e não realiza diagnóstico nem substitui acompanhamento médico, psicológico ou musicoterapêutico.
+    </p>
+  </section>
+
+  <section id="contato" class="section contact-section">
+    <div class="contact-intro">
+      <p class="eyebrow">Vamos conversar</p>
+      <h2>Sua voz ajuda o SentiSom a crescer.</h2>
+      <p>Tem uma ideia, uma sugestão ou algo para contar? A gente quer ouvir.</p>
+      <div class="contact-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <form class="contact-form" id="contactForm">
+      <div class="form-row">
+        <label>Seu nome
+          <input required name="name" autocomplete="name" placeholder="Como podemos te chamar?" />
+        </label>
+        <label>Seu e-mail
+          <input required type="email" name="email" autocomplete="email" placeholder="Para nossa resposta" />
+        </label>
+      </div>
+
+      <label>Tipo de mensagem
+        <select required name="type">
+          <option value="" disabled selected>Selecione uma opção</option>
+          <option>Elogio</option>
+          <option>Crítica</option>
+          <option>Sugestão</option>
+          <option>Ideia de mudança</option>
+          <option>Problema no site</option>
+          <option>Outro</option>
+        </select>
+      </label>
+
+      <label>Mensagem
+        <textarea required name="message" rows="4" placeholder="Escreva sua mensagem aqui..."></textarea>
+      </label>
+
+      <button class="primary-button" type="submit">Enviar mensagem <span>→</span></button>
+      <p class="success" id="contactSuccess" role="status" hidden>✦ Obrigado pelo contato! Sua mensagem foi registrada.</p>
+      <p class="prototype-note">O formulário ainda não envia e-mail. A conexão com o backend será feita em breve.</p>
+    </form>
+  </section>
+
+  <footer>
+    <button class="brand" data-scroll="inicio">
+      <span class="brand-mark"><i></i><i></i><i></i></span>Senti<span>Som</span>
+    </button>
+    <p>SentiSom — Projeto MOBIPE | Colégio Positivo Boa Vista</p>
+    <div>
+      <button data-scroll="quem-somos">Quem Somos</button>
+      <button data-scroll="saiba-mais">Saiba Mais</button>
+      <button data-scroll="contato">Contato</button>
+    </div>
+  </footer>
+</main>
+
+<script>
+  const feeling = document.getElementById("feeling");
+  const findMusic = document.getElementById("findMusic");
+  const recommendation = document.getElementById("recommendation");
+  const listenButton = document.getElementById("listenButton");
+  const apiStatus = document.getElementById("apiStatus");
+  const menuToggle = document.getElementById("menuToggle");
+  const mainNav = document.getElementById("mainNav");
+  const genreButtons = [...document.querySelectorAll(".genre-row button")];
+
+  const fallbackCatalog = [
+    { genre:"Rock", title:"Dias Melhores", artist:"Jota Quest", mood:"respirar e seguir em frente", note:"Uma faixa de rock brasileiro com clima de esperança para acompanhar o momento sem pesar." },
+    { genre:"Pop", title:"Firework", artist:"Katy Perry", mood:"recuperar energia", note:"Pop vibrante para quando você quer uma música que acompanhe uma mudança de energia." },
+    { genre:"Rap/Trap", title:"Sunflower", artist:"Post Malone & Swae Lee", mood:"desacelerar com leveza", note:"Uma faixa suave e melódica para um momento mais tranquilo." },
+    { genre:"Pagode/Samba", title:"Deixa Acontecer", artist:"Grupo Revelação", mood:"acolher e respirar", note:"Um pagode leve para desacelerar e deixar o momento ganhar um pouco mais de espaço." },
+    { genre:"Sertanejo", title:"Tocando em Frente", artist:"Almir Sater & Renato Teixeira", mood:"refletir com calma", note:"Uma canção serena para acompanhar momentos de reflexão e tranquilidade." },
+    { genre:"MPB", title:"Trevo (Tu)", artist:"ANAVITÓRIA & Tiago Iorc", mood:"ficar mais leve", note:"Uma faixa delicada e tranquila para acompanhar um momento mais leve." },
+    { genre:"Eletrônica", title:"The Nights", artist:"Avicii", mood:"ganhar energia", note:"Uma música eletrônica de clima positivo para quando você quer mais movimento e disposição." },
+    { genre:"Indie", title:"Home", artist:"Edward Sharpe & The Magnetic Zeros", mood:"sentir acolhimento", note:"Uma faixa indie calorosa para acompanhar um momento de proximidade e conforto." },
+    { genre:"Tanto faz", title:"O Sol", artist:"Vitor Kley", mood:"trazer leveza", note:"Uma faixa solar e tranquila para combinar com diferentes momentos do dia." }
+  ];
+
+  function selectedGenres() {
+    const selected = genreButtons.filter(b => b.classList.contains("selected")).map(b => b.dataset.genre);
+    return selected.length ? selected : ["Tanto faz"];
+  }
+
+  genreButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const anyButton = genreButtons.find(b => b.dataset.genre === "Tanto faz");
+      if (btn.dataset.genre === "Tanto faz") {
+        genreButtons.forEach(b => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        return;
+      }
+      anyButton?.classList.remove("selected");
+      const selected = genreButtons.filter(b => b.classList.contains("selected"));
+      if (btn.classList.contains("selected")) btn.classList.remove("selected");
+      else if (selected.length < 3) btn.classList.add("selected");
+      if (!genreButtons.some(b => b.classList.contains("selected"))) anyButton?.classList.add("selected");
+    });
+  });
+
+  function resetRecommendation() {
+    recommendation.hidden = true;
+    listenButton.hidden = true;
+    listenButton.onclick = null;
+    apiStatus.textContent = "";
+    apiStatus.classList.remove("error");
+  }
+
+  function syncFindButton() {
+    findMusic.disabled = !feeling.value.trim();
+  }
+
+  function showRecommendation(result, sourceLabel) {
+    document.getElementById("resultTag").textContent = `${sourceLabel} · ${result.genre || ""}${result.genre ? " · " : ""}${result.mood}`;
+    document.getElementById("resultTitle").textContent = result.title;
+    document.getElementById("resultArtist").textContent = result.artist;
+    document.getElementById("resultNote").textContent = result.note;
+
+    const query = encodeURIComponent(`${result.title} ${result.artist}`);
+    listenButton.hidden = false;
+    listenButton.onclick = () => window.open(
+      `https://www.youtube.com/results?search_query=${query}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+    recommendation.hidden = false;
+  }
+
+  function localFallback(genres) {
+    const requested = genres.find(g => g !== "Tanto faz");
+    return fallbackCatalog.find(i => i.genre === requested) || fallbackCatalog[fallbackCatalog.length - 1];
+  }
+
+  async function requestAIRecommendation(text, genres) {
+    const response = await fetch("https://sentisom-api.bruninhoseveropaes.workers.dev", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body:JSON.stringify({ feeling:text, genres })
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || "Falha na recomendação.");
+    return data;
+  }
+
+  feeling.addEventListener("input", () => {
+    document.querySelectorAll(".mood-row button").forEach(btn => btn.classList.remove("selected"));
+    resetRecommendation();
+    syncFindButton();
+  });
+
+  document.querySelectorAll(".mood-row button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".mood-row button").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      feeling.value = btn.textContent.trim();
+      resetRecommendation();
+      syncFindButton();
+    });
+  });
+
+  findMusic.addEventListener("click", async () => {
+    const text = feeling.value.trim();
+    if (!text) return;
+
+    const genres = selectedGenres();
+    const original = findMusic.innerHTML;
+    findMusic.disabled = true;
+    findMusic.textContent = "Escolhendo sua música...";
+    resetRecommendation();
+
+    try {
+      const result = await requestAIRecommendation(text, genres);
+      showRecommendation(result, "Sugestão da IA");
+      apiStatus.textContent = "Recomendação personalizada usando IA.";
+    } catch (error) {
+      console.error(error);
+      showRecommendation(localFallback(genres), "Modo de demonstração");
+      apiStatus.textContent = "A IA está temporariamente indisponível; usamos uma recomendação local.";
+      apiStatus.classList.add("error");
+    } finally {
+      findMusic.innerHTML = original;
+      findMusic.disabled = false;
+    }
+  });
+
+  function scrollToSection(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior:"smooth", block:"start" });
+    mainNav.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  }
+
+  document.querySelectorAll("[data-scroll]").forEach(btn => btn.addEventListener("click", () => scrollToSection(btn.dataset.scroll)));
+
+  menuToggle.addEventListener("click", () => {
+    const open = mainNav.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(open));
+  });
+
+  document.getElementById("contactForm").addEventListener("submit", event => {
+    event.preventDefault();
+    event.currentTarget.reset();
+    document.getElementById("contactSuccess").hidden = false;
+  });
+</script>
+</body>
+</html>
